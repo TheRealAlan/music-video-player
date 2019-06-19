@@ -1,0 +1,18 @@
+.repeatButton {
+  composes: u-buttonReset from '../../../../App.module.css';
+  composes: transportButton from '../Transport.module.css';
+  padding: 6px;
+}
+
+.repeatButton svg {
+  width: 18px;
+  height: auto;
+}
+
+.isActive {
+  opacity: 1;
+}
+
+.isActive svg path {
+  fill: #9bd770;
+}

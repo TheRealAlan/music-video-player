@@ -1,0 +1,10 @@
+.options {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: calc(50% - 2px);
+  height: calc(100% - 2px);
+  background-color: #333;
+  padding: 18px;
+  box-sizing: border-box;
+}

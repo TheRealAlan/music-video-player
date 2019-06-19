@@ -1,0 +1,34 @@
+.u-buttonReset {
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
+
+.u-buttonRest::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.app {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #111;
+}
+
+.app svg {
+  display: block;
+}

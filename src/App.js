@@ -1,24 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { setGlobal } from 'reactn';
+
+import UserBar from './components/UserBar';
+import Interface from './components/Interface';
+import Player from './components/Player';
+
+import stylesheet from './App.module.css';
+
+// import a track here
+import track from './tracks/let_it_happen.mp3';
 
 function App() {
+  setGlobal({
+    currentTime: null,
+    currentTrack: track,
+    duration: null,
+    isPlaying: false,
+    isLooping: false,
+    isMuted: false,
+    isOptionsOpen: false,
+    isShuffling: false,
+    isTrackListOpen: false,
+    volume: 100,
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={stylesheet.app}>
+      <UserBar />
+      <Interface />
+      <Player />
     </div>
   );
 }

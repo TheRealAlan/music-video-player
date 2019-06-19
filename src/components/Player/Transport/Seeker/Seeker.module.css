@@ -1,0 +1,29 @@
+.seeker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.time {
+  font-size: 10px;
+  flex: 1 1 auto;
+}
+
+.timeline {
+  display: flex;
+  flex: 1 1 auto;
+  width: 200px;
+  background-color: #111;
+  height: 4px;
+  border-radius: 2px;
+  margin: 0 12px;
+  overflow: hidden;
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background-color: #777
+}
