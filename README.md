@@ -1,12 +1,14 @@
 # (The Extremely Creatively Named) Music Video Player
 
-This is a browser-based (possibly standalone in the future) audio player with a focus on creative audio-triggered visualizations. The UI is less than halfway thought through, using Spotify's transport controls as a rough reference.
+This is a browser-based (possibly standalone in the future) audio player with a focus on creative audio-triggered visualizations. The UI is less than halfway thought through, using Spotify's player controls as a rough reference.
 
-Currently it:
+## Current Features
+
 - [X] Loads a local audio file and plays / pauses with working volume / muting controls
 - [X] Has a very basic and messy bar graph visualization
 
-In the future it may:
+## Future Features
+
 - [ ] Have a better name
 - [ ] Connect to a Spotify account's playlists
 - [ ] Have a local file browser
@@ -14,13 +16,24 @@ In the future it may:
 - [ ] Fullscreen mode
 - [ ] Be a standalone native app
 
+## Far Future Features
+
+- [ ] Camera gesture interactions?
+
 | Screenshot |
 | --- |
 | ![Screenshot](screenshot.png) |
 
+## Inspiration
+
+Visuals that are reactive to sound fascinate me. I have both a design and music heavy background. Each has influenced the other. This seems like an interesting way to explore both of these things together.
+
+I've also come to the realization that not everyone can enjoy music by itself. Anyone who is hearing impaired should still be able to experience music in some way. This project is a way for me to explore these possibilities.
+
 Some things that inspired this project:
 - [Atari Video Music](https://en.wikipedia.org/wiki/Atari_Video_Music)
 - [Adult Swim Singles](https://www.adultswim.com/music/singles-2017/61)
+- [Tarik Barri](http://tarikbarri.nl/video)
 
 ## Available Scripts
 
