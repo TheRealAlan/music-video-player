@@ -1,5 +1,5 @@
 .playButton {
-  composes: u-buttonReset from '../../../../App.module.css';
+  composes: u-buttonReset from '../../../../index.module.css';
   composes: transportButton from '../Transport.module.css';
   padding: 12px;
   margin: 0 18px;

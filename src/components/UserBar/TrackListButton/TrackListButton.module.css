@@ -1,5 +1,5 @@
 .trackListButton {
-  composes: u-buttonReset from '../../../App.module.css';
+  composes: u-buttonReset from '../../../index.module.css';
   padding: 6px;
   transition: all 0.1s ease-in-out;
   opacity: 0.6;

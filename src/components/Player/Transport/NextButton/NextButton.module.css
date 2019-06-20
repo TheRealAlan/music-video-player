@@ -1,5 +1,5 @@
 .nextButton {
-  composes: u-buttonReset from '../../../../App.module.css';
+  composes: u-buttonReset from '../../../../index.module.css';
   composes: transportButton from '../Transport.module.css';
   padding: 6px;
   margin-right: 18px;

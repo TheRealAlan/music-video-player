@@ -7,7 +7,7 @@ import Controls from './Controls';
 
 import stylesheet from './Player.module.css';
 
-function Player({}) {
+function Player() {
   return (
     <div className={stylesheet.player}>
       <TrackInfo />

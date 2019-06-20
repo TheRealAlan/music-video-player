@@ -4,11 +4,11 @@ import TrackList from './TrackList';
 import Options from './Options';
 import Visualizer from './Visualizer';
 
-import stylesheet from './Interface.module.css';
+import stylesheet from './Content.module.css';
 
-function Interface() {
+function Content() {
   return (
-    <div className={stylesheet.interface}>
+    <div className={stylesheet.content}>
       <TrackList />
       <Options />
       <Visualizer />
@@ -16,4 +16,4 @@ function Interface() {
   );
 }
 
-export default Interface;
+export default Content;

@@ -1,14 +1,14 @@
 import React from 'react';
 import { setGlobal } from 'reactn';
 
-import UserBar from './components/UserBar';
-import Interface from './components/Interface';
-import Player from './components/Player';
+import UserBar from 'components/UserBar';
+import Content from 'components/Content';
+import Player from 'components/Player';
 
 import stylesheet from './App.module.css';
 
 // import a track here
-import track from './tracks/let_it_happen.mp3';
+import track from 'tracks/let_it_happen.mp3';
 
 function App() {
   setGlobal({
@@ -27,7 +27,7 @@ function App() {
   return (
     <div className={stylesheet.app}>
       <UserBar />
-      <Interface />
+      <Content />
       <Player />
     </div>
   );
