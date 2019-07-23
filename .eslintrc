@@ -1,9 +1,14 @@
 {
   "extends": "react-app",
-  "plugins": ["prettier"],
+  "plugins": [
+    "prettier",
+    "react-hooks"
+  ],
   "rules": {
     "prettier/prettier": "error",
-    "max-len": ["error", 120]
+    "max-len": ["error", 120],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "settings": {
     "import/resolver": {

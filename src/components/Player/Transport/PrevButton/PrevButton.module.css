@@ -1,6 +1,0 @@
-.prevButton {
-  composes: u-buttonReset from '../../../../index.module.css';
-  composes: transportButton from '../Transport.module.css';
-  padding: 6px;
-  margin-left: 18px;
-}

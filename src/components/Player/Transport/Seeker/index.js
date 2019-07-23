@@ -1,38 +1,29 @@
 import React from 'react';
-import { useGlobal } from 'reactn';
+import PropTypes from 'prop-types';
+
+import convertTime from 'functions/convertTime';
+import Range from 'components/shared/Range';
 
 import stylesheet from './Seeker.module.css';
 
-function Seeker() {
-  const [duration] = useGlobal('duration');
-  const [currentTime] = useGlobal('currentTime');
-  const [isPlaying] = useGlobal('isPlaying');
-  const progressBarWidth = {
-    width: `${Math.round((currentTime / duration) * 100)}%`,
-  };
-
-  const convertTime = (time) => {
-    let minutes = Math.round(~~((time % 3600) / 60));
-    let seconds = Math.round(time % 60);
-
-    if (seconds < 10) {
-      seconds = `0${seconds}`;
-    }
-
-    return `${minutes}:${seconds}`;
-  };
-
+function Seeker({ duration, currentTime, handleTrackClick }) {
   return (
     <div className={stylesheet.seeker}>
       <div className={stylesheet.time}>{convertTime(currentTime)}</div>
-      <div className={stylesheet.timeline}>
-        <div className={stylesheet.progress} style={progressBarWidth} />
-      </div>
-      <div className={stylesheet.time}>
-        {isPlaying ? convertTime(duration) : '0:00'}
-      </div>
+      <Range
+        maxValue={duration}
+        currentValue={currentTime}
+        handleChange={handleTrackClick}
+      />
+      <div className={stylesheet.time}>{convertTime(duration)}</div>
     </div>
   );
 }
+
+Seeker.propTypes = {
+  currentTime: PropTypes.number.isRequired,
+  duration: PropTypes.number.isRequired,
+  handleTrackClick: PropTypes.func.isRequired,
+};
 
 export default Seeker;

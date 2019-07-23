@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 50%;
 }
 
 .buttons {
@@ -12,10 +13,62 @@
 }
 
 .transportButton {
+  composes: u-buttonReset from '../../../index.module.css';
   transition: all 0.1s ease-in-out;
   opacity: 0.6;
 }
 
 .transportButton:hover {
   opacity: 1;
+}
+
+.shuffleButton {
+  padding: 6px;
+}
+
+.shuffleButton svg {
+  width: 16px;
+  height: auto;
+}
+
+.prevButton {
+  padding: 6px;
+  margin-left: 18px;
+}
+
+.playButton {
+  padding: 12px;
+  margin: 0 18px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale3d(1, 1, 1);
+}
+
+.playButton:hover {
+  transform: scale3d(1.05, 1.05, 1);
+}
+
+.nextButton {
+  padding: 6px;
+  margin-right: 18px;
+}
+
+.repeatButton {
+  padding: 6px;
+}
+
+.repeatButton svg {
+  width: 18px;
+  height: auto;
+}
+
+.isActive {
+  opacity: 1;
+}
+
+.isActive svg path {
+  fill: #9bd770;
 }

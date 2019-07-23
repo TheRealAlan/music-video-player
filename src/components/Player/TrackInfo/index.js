@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import stylesheet from './TrackInfo.module.css';
 
-function TrackInfo() {
-  return <div className={stylesheet.trackInfo}>Track Info</div>;
+function TrackInfo({ currentTrack }) {
+  return <div className={stylesheet.trackInfo}>{currentTrack}</div>;
 }
+
+TrackInfo.propTypes = {
+  currentTrack: PropTypes.string.isRequired,
+};
 
 export default TrackInfo;
