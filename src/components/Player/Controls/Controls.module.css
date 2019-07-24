@@ -31,3 +31,19 @@
   
 }
 
+.fullscreenButton {
+  composes: u-buttonReset from '../../../index.module.css';
+  padding: 6px;
+  opacity: 0.6;
+  transition: all 0.1s ease-in-out;
+  width: 24px;
+}
+
+.fullscreenButton svg {
+  width: 16px;
+  height: auto;
+}
+
+.fullscreenButton:hover {
+  opacity: 1;
+}
