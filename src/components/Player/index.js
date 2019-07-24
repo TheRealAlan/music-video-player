@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 import TrackInfo from './TrackInfo';
 import Transport from './Transport';
@@ -12,10 +13,12 @@ function Player({
   duration,
   currentTrack,
   handleTrackClick,
+  isFullscreen,
   isMuted,
   isPlaying,
   isRepeating,
   isShuffling,
+  setIsFullscreen,
   setIsMuted,
   setIsPlaying,
   setIsRepeating,
@@ -23,8 +26,12 @@ function Player({
   setVolume,
   volume,
 }) {
+  const classNames = cx(stylesheet.player, {
+    [stylesheet.fullscreen]: isFullscreen,
+  });
+
   return (
-    <div className={stylesheet.player}>
+    <div className={classNames}>
       <TrackInfo currentTrack={currentTrack} />
       <Transport
         currentTime={currentTime}
@@ -38,7 +45,9 @@ function Player({
         setIsShuffling={setIsShuffling}
       />
       <Controls
+        isFullscreen={isFullscreen}
         isMuted={isMuted}
+        setIsFullscreen={setIsFullscreen}
         setIsMuted={setIsMuted}
         setVolume={setVolume}
         volume={volume}
@@ -52,10 +61,12 @@ Player.propTypes = {
   currentTrack: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   handleTrackClick: PropTypes.func.isRequired,
+  isFullscreen: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   isMuted: PropTypes.bool.isRequired,
   isRepeating: PropTypes.bool.isRequired,
   isShuffling: PropTypes.bool.isRequired,
+  setIsFullscreen: PropTypes.func.isRequired,
   setIsMuted: PropTypes.func.isRequired,
   setIsPlaying: PropTypes.func.isRequired,
   setIsRepeating: PropTypes.func.isRequired,

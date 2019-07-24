@@ -8,11 +8,16 @@ import TrackListIcon from 'icons/TrackListIcon';
 import stylesheet from './UserBar.module.css';
 
 function UserBar({
+  isFullscreen,
   isOptionsOpen,
   isTrackListOpen,
   setIsOptionsOpen,
   setIsTrackListOpen,
 }) {
+  const classNames = cx(stylesheet.userBar, {
+    [stylesheet.fullscreen]: isFullscreen,
+  });
+
   const handleTrackListClick = () => {
     setIsTrackListOpen(!isTrackListOpen);
   };
@@ -22,7 +27,7 @@ function UserBar({
   };
 
   return (
-    <div className={stylesheet.userBar}>
+    <div className={classNames}>
       {/* Track List Button */}
       <button
         className={cx(stylesheet.trackListButton, {

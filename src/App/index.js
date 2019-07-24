@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
+import Fullscreen from 'components/Fullscreen';
 import Audio from 'components/Audio';
 import UserBar from 'components/UserBar';
 import Content from 'components/Content';
@@ -15,6 +16,7 @@ function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(track);
   const [duration, setDuration] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isRepeating, setIsRepeating] = useState(false);
@@ -47,41 +49,46 @@ function App() {
   }, [audioRef, volume, isMuted]);
 
   return (
-    <div className={stylesheet.app}>
-      <UserBar
-        isOptionsOpen={isOptionsOpen}
-        isTrackListOpen={isTrackListOpen}
-        setIsOptionsOpen={setIsOptionsOpen}
-        setIsTrackListOpen={setIsTrackListOpen}
-      />
-      <Content
-        isOptionsOpen={isOptionsOpen}
-        isTrackListOpen={isTrackListOpen}
-      />
-      <Visualizer ref={audioRef} />
-      <Player
-        currentTrack={currentTrack}
-        currentTime={currentTime}
-        duration={duration}
-        handleTrackClick={handleTrackClick}
-        isMuted={isMuted}
-        isPlaying={isPlaying}
-        isRepeating={isRepeating}
-        isShuffling={isShuffling}
-        setIsMuted={setIsMuted}
-        setIsPlaying={setIsPlaying}
-        setIsRepeating={setIsRepeating}
-        setIsShuffling={setIsShuffling}
-        setVolume={setVolume}
-        volume={volume}
-      />
-      <Audio
-        ref={audioRef}
-        handleDuration={setDuration}
-        handleCurrentTime={setCurrentTime}
-        track={track}
-      />
-    </div>
+    <Fullscreen isFullscreen={isFullscreen} setIsFullscreen={setIsFullscreen}>
+      <div className={stylesheet.app}>
+        <UserBar
+          isFullscreen={isFullscreen}
+          isOptionsOpen={isOptionsOpen}
+          isTrackListOpen={isTrackListOpen}
+          setIsOptionsOpen={setIsOptionsOpen}
+          setIsTrackListOpen={setIsTrackListOpen}
+        />
+        <Content
+          isOptionsOpen={isOptionsOpen}
+          isTrackListOpen={isTrackListOpen}
+        />
+        <Visualizer ref={audioRef} />
+        <Player
+          currentTrack={currentTrack}
+          currentTime={currentTime}
+          duration={duration}
+          handleTrackClick={handleTrackClick}
+          isFullscreen={isFullscreen}
+          isMuted={isMuted}
+          isPlaying={isPlaying}
+          isRepeating={isRepeating}
+          isShuffling={isShuffling}
+          setIsFullscreen={setIsFullscreen}
+          setIsMuted={setIsMuted}
+          setIsPlaying={setIsPlaying}
+          setIsRepeating={setIsRepeating}
+          setIsShuffling={setIsShuffling}
+          setVolume={setVolume}
+          volume={volume}
+        />
+        <Audio
+          ref={audioRef}
+          handleDuration={setDuration}
+          handleCurrentTime={setCurrentTime}
+          track={track}
+        />
+      </div>
+    </Fullscreen>
   );
 }
 
