@@ -1,0 +1,25 @@
+.account {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  background-color: #555;
+  margin-right: 12px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.userName {
+  color: #fff;
+  text-decoration: none;
+}
+
+.userName:hover {
+  text-decoration: underline;
+}

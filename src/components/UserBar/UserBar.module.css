@@ -56,3 +56,7 @@
 .fullscreen:hover {
   opacity: 1;
 }
+
+.loginButton {
+  composes: u-buttonReset from '../../index.module.css';
+}

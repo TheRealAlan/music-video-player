@@ -12,7 +12,7 @@ function TrackInfo({ currentTrack }) {
 }
 
 TrackInfo.propTypes = {
-  currentTrack: PropTypes.string.isRequired,
+  currentTrack: PropTypes.string,
 };
 
 export default TrackInfo;

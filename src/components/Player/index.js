@@ -58,7 +58,7 @@ function Player({
 
 Player.propTypes = {
   currentTime: PropTypes.number.isRequired,
-  currentTrack: PropTypes.string.isRequired,
+  currentTrack: PropTypes.string,
   duration: PropTypes.number.isRequired,
   handleTrackClick: PropTypes.func.isRequired,
   isFullscreen: PropTypes.bool.isRequired,
