@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Spotify from 'spotify-web-api-js';
 
 import Fullscreen from 'components/Fullscreen';
 import Audio from 'components/Audio';
@@ -8,15 +9,17 @@ import Player from 'components/Player';
 import Visualizer from 'components/Visualizer';
 
 import stylesheet from './App.module.css';
+import SpotifyWebApi from 'spotify-web-api-js';
 
 // import a track here
-import track from 'tracks/let_it_happen.mp3';
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState(track);
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [duration, setDuration] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isRepeating, setIsRepeating] = useState(false);
@@ -25,10 +28,50 @@ function App() {
   const [isTrackListOpen, setIsTrackListOpen] = useState(false);
   const [volume, setVolume] = useState(1);
   const audioRef = useRef(null);
+  const spotifyApi = new SpotifyWebApi();
+
+  const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+  const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
+  const SCOPES = ['user-read-currently-playing', 'user-read-playback-state'];
+
+  console.log(REDIRECT_URI);
+
+  // Get the hash of the url
+  const hash = window.location.hash
+    .substring(1)
+    .split('&')
+    .reduce(function(initial, item) {
+      if (item) {
+        var parts = item.split('=');
+        initial[parts[0]] = decodeURIComponent(parts[1]);
+      }
+      return initial;
+    }, {});
+
+  // Clear params
+  window.location.hash = '';
+
+  const LOGIN_URL = `${AUTH_ENDPOINT}?response_type=token&client_id=${CLIENT_ID}&scope=${SCOPES.join(
+    '%20',
+  )}&redirect_uri=${REDIRECT_URI}`;
 
   const handleTrackClick = (position) => {
     audioRef.current.currentTime = position;
   };
+
+  /**
+   * Get Spotify token
+   */
+  useEffect(() => {
+    let token = hash.access_token;
+
+    if (token) {
+      spotifyApi.setAccessToken(token);
+      setIsLoggedIn(true);
+      spotifyApi.getMe().then((data) => setCurrentUser(data));
+    }
+  }, [hash.access_token, spotifyApi]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -52,7 +95,10 @@ function App() {
     <Fullscreen isFullscreen={isFullscreen} setIsFullscreen={setIsFullscreen}>
       <div className={stylesheet.app}>
         <UserBar
+          currentUser={currentUser}
+          loginUrl={LOGIN_URL}
           isFullscreen={isFullscreen}
+          isLoggedIn={isLoggedIn}
           isOptionsOpen={isOptionsOpen}
           isTrackListOpen={isTrackListOpen}
           setIsOptionsOpen={setIsOptionsOpen}
@@ -85,7 +131,7 @@ function App() {
           ref={audioRef}
           handleDuration={setDuration}
           handleCurrentTime={setCurrentTime}
-          track={track}
+          currentTrack={currentTrack}
         />
       </div>
     </Fullscreen>
