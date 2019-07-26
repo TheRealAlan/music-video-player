@@ -35,6 +35,7 @@ function Player({
       <TrackInfo currentTrack={currentTrack} />
       <Transport
         currentTime={currentTime}
+        currentTrack={currentTrack}
         duration={duration}
         handleTrackClick={handleTrackClick}
         isPlaying={isPlaying}
@@ -58,7 +59,7 @@ function Player({
 
 Player.propTypes = {
   currentTime: PropTypes.number.isRequired,
-  currentTrack: PropTypes.string,
+  currentTrack: PropTypes.object,
   duration: PropTypes.number.isRequired,
   handleTrackClick: PropTypes.func.isRequired,
   isFullscreen: PropTypes.bool.isRequired,

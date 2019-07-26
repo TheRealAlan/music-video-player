@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import Spotify from 'spotify-web-api-js';
 
 import Fullscreen from 'components/Fullscreen';
@@ -16,6 +16,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(null);
+  const [currentTracks, setCurrentTracks] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [duration, setDuration] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -26,6 +27,7 @@ function App() {
   const [isShuffling, setIsShuffling] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isTrackListOpen, setIsTrackListOpen] = useState(false);
+  const [playlists, setPlaylists] = useState(null);
   const [volume, setVolume] = useState(1);
   const audioRef = useRef(null);
   const spotifyApi = new SpotifyWebApi();
@@ -33,9 +35,13 @@ function App() {
   const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
   const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-  const SCOPES = ['user-read-currently-playing', 'user-read-playback-state'];
-
-  console.log(REDIRECT_URI);
+  const SCOPES = [
+    'user-read-currently-playing',
+    'user-read-playback-state',
+    'streaming',
+    'user-read-email',
+    'user-read-private',
+  ];
 
   // Get the hash of the url
   const hash = window.location.hash
@@ -60,18 +66,37 @@ function App() {
     audioRef.current.currentTime = position;
   };
 
+  const getUserData = useCallback(() => {
+    spotifyApi.getMe().then((data) => {
+      setCurrentUser(data);
+    });
+    spotifyApi.getUserPlaylists().then((data) => setPlaylists(data));
+  }, [spotifyApi]);
+
+  const getTracksData = (id) => {
+    spotifyApi.getPlaylistTracks(id).then((data) => {
+      setCurrentTracks(data);
+    });
+  };
+
+  const getTrackData = (id) => {
+    spotifyApi.getTrack(id).then((data) => {
+      setCurrentTrack(data);
+    });
+  };
+
   /**
    * Get Spotify token
    */
   useEffect(() => {
     let token = hash.access_token;
 
-    if (token) {
+    if (token && !isLoggedIn) {
       spotifyApi.setAccessToken(token);
       setIsLoggedIn(true);
-      spotifyApi.getMe().then((data) => setCurrentUser(data));
+      getUserData();
     }
-  }, [hash.access_token, spotifyApi]);
+  }, [getUserData, hash.access_token, isLoggedIn, spotifyApi]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -105,8 +130,12 @@ function App() {
           setIsTrackListOpen={setIsTrackListOpen}
         />
         <Content
+          currentTracks={currentTracks}
+          getTrackData={getTrackData}
+          getTracksData={getTracksData}
           isOptionsOpen={isOptionsOpen}
           isTrackListOpen={isTrackListOpen}
+          playlists={playlists}
         />
         <Visualizer ref={audioRef} />
         <Player

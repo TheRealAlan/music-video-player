@@ -1,3 +1,30 @@
 .trackInfo {
   width: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.trackColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.trackImage {
+  width: 60px;
+  height: auto;
+  display: block;
+  margin-right: 12px;
+}
+
+.trackName,
+.trackArtist {
+  display: block;
+}
+
+.trackName {
+  margin-bottom: 6px;
+}
+
+.artistName {
+  font-size: 12px;
 }

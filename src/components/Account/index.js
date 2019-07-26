@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import stylesheet from './Account.module.css';
 
 function Account({ currentUser }) {
-  console.log(currentUser);
   return (
     <div className={stylesheet.account}>
       <div

@@ -1,10 +1,98 @@
-.trackList {
+.tracklist {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: 1px;
   left: 1px;
   width: calc(50% - 2px);
   height: calc(100% - 2px);
   background-color: #333;
-  padding: 18px;
+  padding: 18px 18px 0;
   box-sizing: border-box;
+}
+
+.title {
+
+}
+
+.playlistsMenu,
+.tracksMenu {
+  margin: 0;
+  padding: 0;
+}
+
+.playlistsMenuItem,
+.tracksMenuItem {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tracksMenuItem {
+  display: flex;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: all 0.15s linear;
+  opacity: 0.6;
+}
+
+.tracksMenuItem:hover {
+  opacity: 1;
+}
+
+.trackItemColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.playlistsButton {
+  composes: u-buttonReset from '../../../index.module.css';
+  color: #fff;
+  padding: 6px;
+  opacity: 0.6;
+  transition: all 0.15s linear;
+}
+
+.playlistsButton:hover {
+  opacity: 1;
+}
+
+.isActive {
+  opacity: 1;
+}
+
+.menus {
+  display: flex;
+  border-top: 1px solid #fff;
+  overflow: hidden;
+}
+
+.playlistsColumn,
+.tracksColumn {
+  padding: 18px 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.playlistsColumn {
+  width: 20%;
+}
+
+.tracksColumn {
+  width: 80%;
+}
+
+.trackName,
+.trackArtist {
+  display: block;
+}
+
+.trackName {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.trackArtist {
+  font-size: 12px;
 }
