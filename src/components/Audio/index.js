@@ -9,7 +9,7 @@ const Audio = forwardRef(
         onLoadedMetadata={(e) => handleDuration(e.target.duration)}
         onTimeUpdate={(e) => handleCurrentTime(e.target.currentTime)}
       >
-        <source src={currentTrack} type="audio/mpeg" />
+        {currentTrack && <source src={currentTrack.href} type="audio/mpeg" />}
       </audio>
     );
   },
@@ -18,7 +18,7 @@ const Audio = forwardRef(
 Audio.propTypes = {
   handleDuration: PropTypes.func.isRequired,
   handleCurrentTime: PropTypes.func.isRequired,
-  currentTrack: PropTypes.string,
+  currentTrack: PropTypes.object,
 };
 
 export default Audio;
