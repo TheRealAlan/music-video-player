@@ -13,7 +13,7 @@
 }
 
 .transportButton {
-  composes: u-buttonReset from '../../../index.module.css';
+  composes: u-buttonReset from '../../index.module.css';
   transition: all 0.1s ease-in-out;
   opacity: 0.6;
 }

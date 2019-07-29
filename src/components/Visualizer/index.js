@@ -2,7 +2,7 @@ import React, { useRef, useEffect, forwardRef } from 'react';
 
 import stylesheet from './Visualizer.module.css';
 
-const Visualizer = forwardRef(({ volume }, ref) => {
+const Visualizer = forwardRef((props, ref) => {
   const canvasRef = useRef();
 
   useEffect(() => {
@@ -48,11 +48,7 @@ const Visualizer = forwardRef(({ volume }, ref) => {
     draw();
   }, [ref]);
 
-  return (
-    <>
-      <canvas ref={canvasRef} className={stylesheet.visualizer} />
-    </>
-  );
+  return <canvas ref={canvasRef} className={stylesheet.visualizer} />;
 });
 
 export default Visualizer;

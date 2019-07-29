@@ -1,7 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Range from 'components/shared/Range';
+
+import {
+  setIsFullscreen,
+  setIsMuted,
+  setVolume,
+  useAppDispatch,
+  useAppState,
+} from '../../AppManager';
 
 import MuteIcon from 'icons/MuteIcon';
 import VolumeIcon from 'icons/VolumeIcon';
@@ -9,16 +16,16 @@ import FullscreenIcon from 'icons/FullscreenIcon';
 
 import stylesheet from './Controls.module.css';
 
-function Controls({
-  isFullscreen,
-  isMuted,
-  setIsFullscreen,
-  setIsMuted,
-  volume,
-  setVolume,
-}) {
+function Controls() {
+  const dispatch = useAppDispatch();
+  const { isFullscreen, isMuted, volume } = useAppState();
+
   const handleMuteClick = () => {
-    setIsMuted(!isMuted);
+    setIsMuted(dispatch, !isMuted);
+  };
+
+  const handleVolumeChange = (value) => {
+    setVolume(dispatch, value);
   };
 
   return (
@@ -27,10 +34,14 @@ function Controls({
         <button className={stylesheet.muteButton} onClick={handleMuteClick}>
           {isMuted ? <MuteIcon /> : <VolumeIcon />}
         </button>
-        <Range currentValue={volume} maxValue={1} handleChange={setVolume} />
+        <Range
+          currentValue={volume}
+          maxValue={1}
+          handleChange={handleVolumeChange}
+        />
         <button
           className={stylesheet.fullscreenButton}
-          onClick={() => setIsFullscreen(!isFullscreen)}
+          onClick={() => setIsFullscreen(dispatch, !isFullscreen)}
         >
           <FullscreenIcon />
         </button>
@@ -38,14 +49,5 @@ function Controls({
     </div>
   );
 }
-
-Controls.propTypes = {
-  isFullscreen: PropTypes.bool.isRequired,
-  isMuted: PropTypes.bool.isRequired,
-  setIsFullscreen: PropTypes.func.isRequired,
-  setIsMuted: PropTypes.func.isRequired,
-  setVolume: PropTypes.func.isRequired,
-  volume: PropTypes.number.isRequired,
-};
 
 export default Controls;

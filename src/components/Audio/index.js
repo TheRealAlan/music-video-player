@@ -1,24 +1,25 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
-const Audio = forwardRef(
-  ({ currentTrack, handleDuration, handleCurrentTime }, ref) => {
-    return (
-      <audio
-        ref={ref}
-        onLoadedMetadata={(e) => handleDuration(e.target.duration)}
-        onTimeUpdate={(e) => handleCurrentTime(e.target.currentTime)}
-      >
-        {currentTrack && <source src={currentTrack.href} type="audio/mpeg" />}
-      </audio>
-    );
-  },
-);
+import {
+  setCurrentTime,
+  setDuration,
+  useAppDispatch,
+  useAppState,
+} from '../../AppManager';
 
-Audio.propTypes = {
-  handleDuration: PropTypes.func.isRequired,
-  handleCurrentTime: PropTypes.func.isRequired,
-  currentTrack: PropTypes.object,
-};
+const Audio = forwardRef((props, ref) => {
+  const dispatch = useAppDispatch();
+  const { currentTrack } = useAppState();
+
+  return (
+    <audio
+      ref={ref}
+      onLoadedMetadata={(e) => setDuration(dispatch, e.target.duration)}
+      onTimeUpdate={(e) => setCurrentTime(dispatch, e.target.currentTime)}
+    >
+      {currentTrack && <source src={currentTrack.href} type="audio/mpeg" />}
+    </audio>
+  );
+});
 
 export default Audio;

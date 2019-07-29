@@ -1,6 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
+
+import {
+  setIsPlaying,
+  setIsRepeating,
+  setIsShuffling,
+  useAppDispatch,
+  useAppState,
+} from '../../AppManager';
 
 import ShuffleIcon from 'icons/ShuffleIcon';
 import PrevIcon from 'icons/PrevIcon';
@@ -9,32 +16,13 @@ import PauseIcon from 'icons/PauseIcon';
 import NextIcon from 'icons/NextIcon';
 import RepeatIcon from 'icons/RepeatIcon';
 
-import Seeker from './Seeker';
+import Seeker from 'components/Seeker';
 
 import stylesheet from './Transport.module.css';
 
-function Transport({
-  currentTime,
-  duration,
-  handleTrackClick,
-  isPlaying,
-  setIsPlaying,
-  isRepeating,
-  setIsRepeating,
-  isShuffling,
-  setIsShuffling,
-}) {
-  const handleShuffleClick = () => {
-    setIsShuffling(!isShuffling);
-  };
-
-  const handlePlayPauseClick = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleRepeatClick = () => {
-    setIsRepeating(!isRepeating);
-  };
+function Transport() {
+  const dispatch = useAppDispatch();
+  const { isPlaying, isRepeating, isShuffling } = useAppState();
 
   return (
     <div className={stylesheet.transport}>
@@ -44,7 +32,7 @@ function Transport({
           className={cx(stylesheet.shuffleButton, stylesheet.transportButton, {
             [stylesheet.isActive]: isShuffling,
           })}
-          onClick={handleShuffleClick}
+          onClick={() => setIsShuffling(dispatch, !isShuffling)}
         >
           <ShuffleIcon />
         </button>
@@ -61,7 +49,7 @@ function Transport({
           className={cx(stylesheet.playButton, stylesheet.transportButton, {
             [stylesheet.isActive]: isPlaying,
           })}
-          onClick={handlePlayPauseClick}
+          onClick={() => setIsPlaying(dispatch, !isPlaying)}
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
@@ -78,30 +66,14 @@ function Transport({
           className={cx(stylesheet.repeatButton, stylesheet.transportButton, {
             [stylesheet.isActive]: isRepeating,
           })}
-          onClick={handleRepeatClick}
+          onClick={() => setIsRepeating(dispatch, !isRepeating)}
         >
           <RepeatIcon />
         </button>
       </div>
-      <Seeker
-        currentTime={currentTime}
-        duration={duration}
-        handleTrackClick={handleTrackClick}
-      />
+      <Seeker />
     </div>
   );
 }
-
-Transport.propTypes = {
-  currentTime: PropTypes.number.isRequired,
-  duration: PropTypes.number.isRequired,
-  handleTrackClick: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  isRepeating: PropTypes.bool.isRequired,
-  isShuffling: PropTypes.bool.isRequired,
-  setIsPlaying: PropTypes.func.isRequired,
-  setIsRepeating: PropTypes.func.isRequired,
-  setIsShuffling: PropTypes.func.isRequired,
-};
 
 export default Transport;

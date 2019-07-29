@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-function Fullscreen({ children, isFullscreen, setIsFullscreen }) {
+import { useAppState } from '../../AppManager';
+
+function Fullscreen({ children }) {
+  const { isFullscreen } = useAppState();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -10,15 +13,13 @@ function Fullscreen({ children, isFullscreen, setIsFullscreen }) {
     } else {
       document.webkitExitFullscreen();
     }
-  }, [isFullscreen, setIsFullscreen]);
+  }, [isFullscreen]);
 
   return <div ref={ref}>{children}</div>;
 }
 
 Fullscreen.propTypes = {
   children: PropTypes.node,
-  isFullscreen: PropTypes.bool.isRequired,
-  setIsFullscreen: PropTypes.func.isRequired,
 };
 
 export default Fullscreen;

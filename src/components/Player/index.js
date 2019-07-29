@@ -1,79 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useRef } from 'react';
 import cx from 'classnames';
 
-import TrackInfo from './TrackInfo';
-import Transport from './Transport';
-import Controls from './Controls';
+import Audio from 'components/Audio';
+import TrackInfo from 'components/TrackInfo';
+import Transport from 'components/Transport';
+import Controls from 'components/Controls';
+import Visualizer from 'components/Visualizer';
+import { useAppState } from '../../AppManager';
 
 import stylesheet from './Player.module.css';
 
-function Player({
-  currentTime,
-  duration,
-  currentTrack,
-  handleTrackClick,
-  isFullscreen,
-  isMuted,
-  isPlaying,
-  isRepeating,
-  isShuffling,
-  setIsFullscreen,
-  setIsMuted,
-  setIsPlaying,
-  setIsRepeating,
-  setIsShuffling,
-  setVolume,
-  volume,
-}) {
+function Player() {
+  const { isFullscreen, isPlaying, isMuted, volume } = useAppState();
+  const audioRef = useRef(null);
   const classNames = cx(stylesheet.player, {
     [stylesheet.fullscreen]: isFullscreen,
   });
 
+  useEffect(() => {
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [audioRef, isPlaying]);
+
+  useEffect(() => {
+    audioRef.current.volume = volume;
+
+    if (isMuted) {
+      audioRef.current.muted = true;
+    } else {
+      audioRef.current.muted = false;
+    }
+  }, [audioRef, isMuted, volume]);
+
   return (
-    <div className={classNames}>
-      <TrackInfo currentTrack={currentTrack} />
-      <Transport
-        currentTime={currentTime}
-        currentTrack={currentTrack}
-        duration={duration}
-        handleTrackClick={handleTrackClick}
-        isPlaying={isPlaying}
-        isRepeating={isRepeating}
-        isShuffling={isShuffling}
-        setIsPlaying={setIsPlaying}
-        setIsRepeating={setIsRepeating}
-        setIsShuffling={setIsShuffling}
-      />
-      <Controls
-        isFullscreen={isFullscreen}
-        isMuted={isMuted}
-        setIsFullscreen={setIsFullscreen}
-        setIsMuted={setIsMuted}
-        setVolume={setVolume}
-        volume={volume}
-      />
-    </div>
+    <>
+      <Visualizer ref={audioRef} />
+      <div className={classNames}>
+        <TrackInfo />
+        <Transport />
+        <Controls />
+      </div>
+      <Audio ref={audioRef} />
+    </>
   );
 }
-
-Player.propTypes = {
-  currentTime: PropTypes.number.isRequired,
-  currentTrack: PropTypes.object,
-  duration: PropTypes.number.isRequired,
-  handleTrackClick: PropTypes.func.isRequired,
-  isFullscreen: PropTypes.bool.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  isMuted: PropTypes.bool.isRequired,
-  isRepeating: PropTypes.bool.isRequired,
-  isShuffling: PropTypes.bool.isRequired,
-  setIsFullscreen: PropTypes.func.isRequired,
-  setIsMuted: PropTypes.func.isRequired,
-  setIsPlaying: PropTypes.func.isRequired,
-  setIsRepeating: PropTypes.func.isRequired,
-  setIsShuffling: PropTypes.func.isRequired,
-  setVolume: PropTypes.func.isRequired,
-  volume: PropTypes.number.isRequired,
-};
 
 export default Player;
