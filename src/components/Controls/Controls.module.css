@@ -12,7 +12,7 @@
 }
 
 .muteButton {
-  composes: u-buttonReset from '../../../index.module.css';
+  composes: u-buttonReset from '../../index.module.css';
   padding: 6px;
   transition: all 0.1s ease-in-out;
   opacity: 0.6;
@@ -32,7 +32,7 @@
 }
 
 .fullscreenButton {
-  composes: u-buttonReset from '../../../index.module.css';
+  composes: u-buttonReset from '../../index.module.css';
   padding: 6px;
   opacity: 0.6;
   transition: all 0.1s ease-in-out;

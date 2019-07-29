@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
+import { useAppState } from '../../AppManager';
 
 import stylesheet from './TrackInfo.module.css';
 
-function TrackInfo({ currentTrack }) {
+function TrackInfo() {
+  const { currentTrack } = useAppState();
+
   return (
     <div className={stylesheet.trackInfo}>
       {currentTrack && (
@@ -26,9 +29,5 @@ function TrackInfo({ currentTrack }) {
     </div>
   );
 }
-
-TrackInfo.propTypes = {
-  currentTrack: PropTypes.object,
-};
 
 export default TrackInfo;
