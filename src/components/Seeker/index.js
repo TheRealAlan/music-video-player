@@ -18,8 +18,8 @@ function Seeker() {
     <div className={stylesheet.seeker}>
       <div className={stylesheet.time}>{convertTime(currentTime)}</div>
       <Range
-        maxValue={duration}
-        currentValue={currentTime}
+        max={duration}
+        value={currentTime}
         handleChange={handleCurrentTimeChange}
       />
       <div className={stylesheet.time}>{convertTime(duration)}</div>

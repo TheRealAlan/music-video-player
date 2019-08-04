@@ -9,4 +9,5 @@
 .time {
   font-size: 10px;
   flex: 1 1 auto;
+  margin: 0 12px;
 }
