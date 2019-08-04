@@ -8,6 +8,9 @@ import {
   useAppState,
 } from '../../AppManager';
 
+import OptionsModal from 'components/OptionsModal';
+import PlaylistsModal from 'components/PlaylistsModal';
+
 import Account from 'components/Account';
 import OptionsIcon from 'icons/OptionsIcon';
 import TrackListIcon from 'icons/TrackListIcon';
@@ -91,6 +94,16 @@ function UserBar() {
           </a>
         )}
       </div>
+
+      {/* Modals */}
+      <OptionsModal
+        showModal={isOptionsOpen}
+        toggleModal={handleOptionsClick}
+      />
+      <PlaylistsModal
+        showModal={isPlaylistOpen}
+        toggleModal={handlePlaylistClick}
+      />
     </div>
   );
 }
