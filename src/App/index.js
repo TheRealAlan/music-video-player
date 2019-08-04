@@ -3,7 +3,7 @@ import React, { useCallback, useState, useRef, useEffect } from 'react';
 
 import AppManager from '../AppManager';
 
-import Fullscreen from 'components/Fullscreen';
+import CustomFullscreen from 'components/shared/CustomFullscreen';
 import UserBar from 'components/UserBar';
 // import Content from 'components/Content';
 import Player from 'components/Player';
@@ -96,7 +96,7 @@ function App() {
 
   return (
     <AppManager>
-      <Fullscreen>
+      <CustomFullscreen>
         <div className={stylesheet.app}>
           <UserBar />
           {/* <Content
@@ -109,7 +109,7 @@ function App() {
           /> */}
           <Player />
         </div>
-      </Fullscreen>
+      </CustomFullscreen>
     </AppManager>
   );
 }

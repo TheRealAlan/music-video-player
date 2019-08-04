@@ -8,7 +8,7 @@ import {
   setVolume,
   useAppDispatch,
   useAppState,
-} from '../../AppManager';
+} from 'AppManager';
 
 import MuteIcon from 'icons/MuteIcon';
 import VolumeIcon from 'icons/VolumeIcon';
@@ -18,7 +18,7 @@ import stylesheet from './Controls.module.css';
 
 function Controls() {
   const dispatch = useAppDispatch();
-  const { isFullscreen, isMuted, volume } = useAppState();
+  const { isMuted, volume } = useAppState();
 
   const handleMuteClick = () => {
     setIsMuted(dispatch, !isMuted);
@@ -26,6 +26,10 @@ function Controls() {
 
   const handleVolumeChange = (value) => {
     setVolume(dispatch, value);
+  };
+
+  const handleFullscreen = () => {
+    setIsFullscreen(dispatch, true);
   };
 
   return (
@@ -37,7 +41,7 @@ function Controls() {
         <Range value={volume} max={1} handleChange={handleVolumeChange} />
         <button
           className={stylesheet.fullscreenButton}
-          onClick={() => setIsFullscreen(dispatch, !isFullscreen)}
+          onClick={handleFullscreen}
         >
           <FullscreenIcon />
         </button>
