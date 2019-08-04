@@ -16,6 +16,7 @@
   padding: 6px;
   transition: all 0.1s ease-in-out;
   opacity: 0.6;
+  margin-right: 12px;
 }
 
 .muteButton svg {
@@ -37,6 +38,7 @@
   opacity: 0.6;
   transition: all 0.1s ease-in-out;
   width: 24px;
+  margin-left: 12px;
 }
 
 .fullscreenButton svg {

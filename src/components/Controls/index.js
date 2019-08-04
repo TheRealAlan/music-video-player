@@ -34,11 +34,7 @@ function Controls() {
         <button className={stylesheet.muteButton} onClick={handleMuteClick}>
           {isMuted ? <MuteIcon /> : <VolumeIcon />}
         </button>
-        <Range
-          currentValue={volume}
-          maxValue={1}
-          handleChange={handleVolumeChange}
-        />
+        <Range value={volume} max={1} handleChange={handleVolumeChange} />
         <button
           className={stylesheet.fullscreenButton}
           onClick={() => setIsFullscreen(dispatch, !isFullscreen)}
