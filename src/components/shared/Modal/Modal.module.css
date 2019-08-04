@@ -1,0 +1,59 @@
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.content {
+  color: #fff;
+  background-color: #222;
+  border-radius: 6px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: calc(100% - 40px);
+  max-width: 800px;
+  max-height: calc(100% - 40px);
+  z-index: 1;
+}
+
+.innerContent {
+  height: 100%;
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+.closeButton {
+  composes: u-buttonReset from '../../../index.module.css';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  transition: all 0.1s ease-in-out;
+  opacity: 0.6;
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+.closeButton svg {
+  width: 18px;
+  height: auto;
+}
